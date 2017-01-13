@@ -1,0 +1,54 @@
+{
+  "name": "fse",
+  "version": "1.0.0",
+  "description": "fs: then-ified, extended",
+  "author": "Jonathan Neal <jonathantneal@hotmail.com>",
+  "license": "CC0-1.0",
+  "repository": "jonathantneal/fse",
+  "homepage": "https://github.com/jonathantneal/fse#readme",
+  "bugs": "https://github.com/jonathantneal/fse/issues",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "lint": "npm run lint:ec && npm run lint:js",
+    "lint:ec": "echint",
+    "lint:js": "eslint *.js --cache --ignore-pattern .gitignore",
+    "pre-commit": "echo 'Running pre-commit checks...' && exit 0",
+    "prepublish": "npm test",
+    "tape": "node test",
+    "test": "npm run lint && npm run tape"
+  },
+  "engines": {
+    "node": ">=6.5.0"
+  },
+  "dependencies": {
+    "minimatch": "^3.0.3"
+  },
+  "devDependencies": {
+    "echint": "^2.1.1",
+    "echint-config-dev": "^1.0.0",
+    "eslint": "^3.13.1",
+    "eslint-config-dev": "^1.0.0"
+  },
+  "echint": {
+    "extends": "dev"
+  },
+  "eslintConfig": {
+    "extends": "dev",
+    "rules": {
+      "no-extra-parens": [0],
+      "no-nested-ternary": [0]
+    }
+  },
+  "pre-commit": [
+    "pre-commit",
+    "test"
+  ],
+  "keywords": [
+    "fs",
+    "promise",
+    "extended"
+  ]
+}
