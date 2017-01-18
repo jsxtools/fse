@@ -4,7 +4,12 @@
 [![Licensing][lic-img]][lic-url]
 [![Changelog][log-img]][log-url]
 
-[fse] is [fs]; then-ified, extended.
+[fse] is [fs]; then-ified, extended. Also;
+
+- New `copydir`, `copyFile`, `rmdir`, `match`, and `touchFile` methods.
+- Improved `mkdir` and `writeFile` methods to allow for recursive directory creation.
+- Improved `watch` method which follows symlinks.
+- All `path` methods.
 
 [fse]: https://github.com/jonathantneal/fse
 [fs]: https://nodejs.org/api/fs.html
