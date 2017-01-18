@@ -314,7 +314,8 @@ class FSWatcher extends Events {
 									resolvedFilename,
 									resolvedChild
 								),
-								ignore
+								ignore,
+								opts
 							)
 						)
 					// direct child
