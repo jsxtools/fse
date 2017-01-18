@@ -146,12 +146,6 @@ Object.assign(
 					reject(error);
 				}
 			}
-		).catch(
-			(error) => {
-				console.log(error);
-
-				throw error;
-			}
 		)
 	},
 	// rmdir, then-ified
