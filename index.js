@@ -346,9 +346,12 @@ class FSWatcher extends Events {
 				// otherwise, if the child is a symbolic link
 				: stat.isSymbolicLink()
 				// direct the link as a child
-				? exports.realpath(child).then(directChild)
+				? exports.readlink(child).then(
+					(realChild) => path.resolve(child, realChild)
+				).then(directChild)
 				// otherwise, resolve an empty promise
-				: Promise.resolve()
+				: Promise.resolve(),
+				() => Promise.resolve()
 			);
 		}
 	}
