@@ -1,7 +1,7 @@
 {
   "name": "fse",
-  "version": "1.0.1",
-  "description": "fs: then-ified, extended",
+  "version": "2.0.0",
+  "description": "fs: then-ified, extended, and dependency-free",
   "author": "Jonathan Neal <jonathantneal@hotmail.com>",
   "license": "CC0-1.0",
   "repository": "jonathantneal/fse",
@@ -12,28 +12,17 @@
     "index.js"
   ],
   "scripts": {
-    "lint": "npm run lint:ec && npm run lint:js",
-    "lint:ec": "echint",
-    "lint:js": "eslint *.js --cache --ignore-pattern .gitignore",
-    "pre-commit": "echo 'Running pre-commit checks...' && exit 0",
     "prepublish": "npm test",
-    "tape": "node test",
-    "test": "npm run lint && npm run tape"
+    "test": "echo 'Running tests...'; npm run test:js && npm run test:node",
+    "test:js": "eslint *.js --cache --ignore-pattern .gitignore",
+    "test:node": "node test"
   },
   "engines": {
     "node": ">=6.5.0"
   },
-  "dependencies": {
-    "minimatch": "^3.0.3"
-  },
   "devDependencies": {
-    "echint": "^2.1.1",
-    "echint-config-dev": "^1.0.0",
-    "eslint": "^3.13.1",
-    "eslint-config-dev": "^1.0.0"
-  },
-  "echint": {
-    "extends": "dev"
+    "eslint": "^3.19.0",
+    "eslint-config-dev": "^2.0.0"
   },
   "eslintConfig": {
     "extends": "dev",
@@ -42,10 +31,6 @@
       "no-nested-ternary": [0]
     }
   },
-  "pre-commit": [
-    "pre-commit",
-    "test"
-  ],
   "keywords": [
     "fs",
     "promise",

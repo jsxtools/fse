@@ -1,14 +1,10 @@
 // tooling
-const Events = require('events');
-const fs     = require('fs');
-const match  = require('minimatch');
-const path   = require('path');
+const fs   = require('fs');
+const path = require('path');
 
 // exports extended
 Object.assign(
 	exports,
-	// path
-	path,
 	// fs
 	fs,
 	// fs then-ified
@@ -187,10 +183,6 @@ Object.assign(
 			)
 		)
 	},
-	// match, from minimatch
-	{
-		match: match
-	},
 	// touchFile, then-ified
 	{
 		touchFile: (filename) => new Promise(
@@ -222,137 +214,5 @@ Object.assign(
 				)
 			)
 		)
-	},
-	// watch, then-ified
-	{
-		watch(pathname, ...args) {
-			// options
-			const opts = typeof args[0] !== 'function' ? args.shift() : {};
-
-			// callback
-			const cb = args[0];
-
-			// watcher
-			const watcher = new FSWatcher(pathname, opts);
-
-			if (cb) {
-				// if a callback is specified, bind it
-				watcher.on('change', cb);
-			}
-
-			return watcher;
-		}
 	}
 );
-
-// FSWatcher with symlink support
-class FSWatcher extends Events {
-	constructor(filename, opts = { recursive: true }) {
-		// emitter
-		const emitter = super();
-
-		// emitter watchers
-		emitter.watchers = [];
-
-		// resolved filename
-		const resolvedFilename = path.resolve(filename);
-
-		// options without recursive
-		const optsSansRecursive = Object.assign({}, opts, { recursive: false });
-
-		// then-ified watch promising watchers
-		const watcher = watch(resolvedFilename).then(
-			() => ({
-				emitter: emitter
-			})
-		);
-
-		// ignore pattern(s) as an array
-		const ignores = Array.isArray(opts.ignore) ? opts.ignore : [opts.ignore];
-
-		// promise then bound to watcher
-		emitter.then = watcher.then.bind(watcher);
-
-		// then-ified watch
-		function watch(watchedFilename) {
-			// get normalized inner filename
-			const resolvedWatchedFilename = path.resolve(resolvedFilename, watchedFilename);
-
-			// push watch emitter to watchers array
-			emitter.watchers.push(
-				// watch emitter forwards changes using relative filepath
-				fs.watch(
-					resolvedWatchedFilename,
-					optsSansRecursive,
-					(eventType, triggeredFilename) => emitter.emit(
-						'change',
-						eventType,
-						path.relative(
-							resolvedFilename,
-							path.join(
-								resolvedWatchedFilename,
-								triggeredFilename
-							)
-						)
-					)
-				)
-			);
-
-			return opts.recursive
-			// if recursive, promise that all files are read
-			? exports.readdir(resolvedWatchedFilename).then(
-				// promise for each child of the watched dir
-				(children) => Promise.all(
-					children.map(
-						// resolved child
-						(child) => path.join(resolvedWatchedFilename, child)
-					).filter(
-						// handle ignore patterns early
-						(resolvedChild) => !ignores.some(
-							(ignore) => match(
-								path.relative(
-									resolvedFilename,
-									resolvedChild
-								),
-								ignore,
-								opts
-							)
-						)
-					// direct child
-					).map(directChild)
-				),
-				(error) => {
-					if (error.code === 'ENOTDIR') {
-						// if watching a file, resolve
-						return Promise.resolve();
-					}
-
-					// otherwise, throw the error
-					throw error;
-				}
-			)
-			// otherwise, resolve an empty promise
-			: Promise.resolve();
-		}
-
-		// direct child to appropriate action
-		function directChild(child) {
-			// child statistics
-			return exports.lstat(child).then(
-				// if the child is a directory
-				(stat) => stat.isDirectory()
-				// watch it
-				? watch(child)
-				// otherwise, if the child is a symbolic link
-				: stat.isSymbolicLink()
-				// direct the link as a child
-				? exports.readlink(child).then(
-					(realChild) => path.resolve(child, realChild)
-				).then(directChild)
-				// otherwise, resolve an empty promise
-				: Promise.resolve(),
-				() => Promise.resolve()
-			);
-		}
-	}
-}
