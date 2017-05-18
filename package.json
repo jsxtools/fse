@@ -1,6 +1,6 @@
 {
   "name": "fse",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "fs: then-ified, extended, and dependency-free",
   "author": "Jonathan Neal <jonathantneal@hotmail.com>",
   "license": "CC0-1.0",
@@ -12,23 +12,29 @@
     "index.js"
   ],
   "scripts": {
-    "prepublish": "npm test",
-    "test": "echo 'Running tests...'; npm run test:js && npm run test:node",
+    "prepublish": "npm test && npm run test:pre",
+    "postpublish": "npm run test:post",
+    "test": "echo 'Running tests...'; npm run test:js && npm run test:pre && npm run test:node && npm run test:post",
+    "test:pre": "babel index.js --presets=env --out-file index.js --source-maps inline",
+    "test:post": "git checkout index.js",
     "test:js": "eslint *.js --cache --ignore-pattern .gitignore",
     "test:node": "node test"
   },
   "engines": {
-    "node": ">=6.5.0"
+    "node": ">=4.0.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
     "eslint": "^3.19.0",
     "eslint-config-dev": "^2.0.0"
   },
   "eslintConfig": {
     "extends": "dev",
     "rules": {
-      "no-extra-parens": [0],
-      "no-nested-ternary": [0]
+      "no-extra-parens": [
+        0
+      ]
     }
   },
   "keywords": [

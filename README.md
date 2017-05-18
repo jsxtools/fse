@@ -1,9 +1,8 @@
 # fse [<img src="https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg" alt="fse" width="81" height="90" align="right">][fse]
 
 [![NPM Version][npm-img]][npm-url]
-[![Build Status][cli-img]][cli-url]
-[![Licensing][lic-img]][lic-url]
-[![Changelog][log-img]][log-url]
+[![Unix Status][cli-img]][cli-url]
+[![Windows Status][win-img]][win-url]
 
 [fse] is [fs] then-ified, extended, and dependency-free. It is also;
 
@@ -17,7 +16,5 @@
 [npm-img]: https://img.shields.io/npm/v/fse.svg
 [cli-url]: https://travis-ci.org/jonathantneal/fse
 [cli-img]: https://img.shields.io/travis/jonathantneal/fse.svg
-[lic-url]: LICENSE.md
-[lic-img]: https://img.shields.io/badge/license-CC0--1.0-blue.svg
-[log-url]: CHANGELOG.md
-[log-img]: https://img.shields.io/badge/changelog-md-blue.svg
+[win-url]: https://ci.appveyor.com/project/jonathantneal/fse
+[win-img]: https://img.shields.io/appveyor/ci/jonathantneal/fse.svg

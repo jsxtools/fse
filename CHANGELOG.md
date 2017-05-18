@@ -1,5 +1,9 @@
 # Changes to fse
 
+### 3.0.0 (May 17, 2017)
+
+- Added: Support for Node v4
+
 ### 2.0.0 (April 17, 2017)
 
 - Removed: watch task — sticking with plain fs promise-ified
