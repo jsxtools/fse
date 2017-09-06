@@ -39,7 +39,29 @@
   },
   "keywords": [
     "fs",
+    "then",
+    "thenified",
+    "promiseified",
+    "promisified",
+    "promises",
+    "promised",
     "promise",
-    "extended"
+    "extends",
+    "extended",
+    "extend",
+    "files",
+    "file",
+    "system",
+    "read",
+    "write",
+    "remove",
+    "copy",
+    "touch",
+    "json",
+    "file",
+    "directory",
+    "windows",
+    "macos",
+    "linux"
   ]
 }
