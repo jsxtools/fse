@@ -1,6 +1,6 @@
 {
   "name": "fse",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "fs: then-ified, extended, and dependency-free",
   "author": "Jonathan Neal <jonathantneal@hotmail.com>",
   "license": "CC0-1.0",
