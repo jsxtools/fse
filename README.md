@@ -4,8 +4,9 @@
 [![Unix Status][cli-img]][cli-url]
 [![Windows Status][win-img]][win-url]
 
-[fse] is [fs] then-ified, extended, and dependency-free. It is also;
+[fse] is [fs] then-ified, extended, and dependency-free. It features;
 
+- Node 4+ compatibility, and;
 - improved `fs.mkdir`, `fs.rmdir`,  and `fs.writeFile` methods allowing
   recursive modification of the file system, and;
 - new `fs.copydir`, `fs.copyFile`, `fs.readJson`, and `fs.touchFile` methods.
@@ -24,8 +25,6 @@ fse.copydir(source, target)
 Promised copying of the contents of a source directory to a target directory.
 `target` may be used to create otherwise non-existent directories.
 
----
-
 ### fse.copyFile
 
 ```js
@@ -39,8 +38,6 @@ Promised copying of a source file to a target file, replacing the target file
 if it already exists. `target` may be used to create otherwise non-existent
 directories.
 
----
-
 ### fse.readJson
 
 ```js
@@ -52,8 +49,6 @@ fse.readJson(path)
 Promised reading of the entire contents of a JSON file, constructing the
 JavaScript value or object described by the file.
 
----
-
 ### fse.touchFile
 
 ```js
@@ -64,6 +59,10 @@ fse.touchFile(path)
 
 Promised existence of a file, creating the file if it does not exist. `path`
 may be used to create otherwise non-existent directories.
+
+## Licensing
+
+[fse] uses the CC0 “No Rights Reserved” license.
 
 [fse]: https://github.com/jonathantneal/fse
 [fs]: https://nodejs.org/api/fs.html
