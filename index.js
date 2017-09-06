@@ -144,6 +144,10 @@ Object.assign(
 			}
 		)
 	},
+	// readJson, then-ified
+	{
+		readJson: (filename) => exports.readFile(filename, 'utf8').then(JSON.parse)
+	},
 	// rmdir, then-ified
 	{
 		rmdir: (pathname, ...args) => new Promise(
