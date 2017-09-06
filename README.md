@@ -6,8 +6,64 @@
 
 [fse] is [fs] then-ified, extended, and dependency-free. It is also;
 
-- improved `fs.mkdir` and `fs.writeFile` methods allowing recursive creation, and;
-- new `fs.copydir`, `fs.copyFile`, `fs.rmdir`, and `fs.touchFile` methods.
+- improved `fs.mkdir`, `fs.rmdir`,  and `fs.writeFile` methods allowing
+  recursive modification of the file system, and;
+- new `fs.copydir`, `fs.copyFile`, `fs.readJson`, and `fs.touchFile` methods.
+
+## New Methods
+
+### fse.copydir
+
+```js
+fse.copydir(source, target)
+```
+
+- source `<string>` | `<Buffer>` | `<URL>`
+- target `<string>` | `<Buffer>` | `<URL>`
+
+Promised copying of the contents of a source directory to a target directory.
+`target` may be used to create otherwise non-existent directories.
+
+---
+
+### fse.copyFile
+
+```js
+fse.copyFile(source, target)
+```
+
+- source `<string>` | `<Buffer>` | `<integer>` filename or file descriptor
+- target `<string>` | `<Buffer>` | `<integer>` filename or file descriptor
+
+Promised copying of a source file to a target file, replacing the target file
+if it already exists. `target` may be used to create otherwise non-existent
+directories.
+
+---
+
+### fse.readJson
+
+```js
+fse.readJson(path)
+```
+
+- path `<string>` | `<Buffer>` | `<integer>` filename or file descriptor
+
+Promised reading of the entire contents of a JSON file, constructing the
+JavaScript value or object described by the file.
+
+---
+
+### fse.touchFile
+
+```js
+fse.touchFile(path)
+```
+
+- path `<string>` | `<Buffer>` | `<integer>` filename or file descriptor
+
+Promised existence of a file, creating the file if it does not exist. `path`
+may be used to create otherwise non-existent directories.
 
 [fse]: https://github.com/jonathantneal/fse
 [fs]: https://nodejs.org/api/fs.html
