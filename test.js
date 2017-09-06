@@ -9,7 +9,13 @@ Promise.all([
 		path.join(__dirname, 'package.json'),
 		'utf-8'
 	).then(
-		(contents) => JSON.parse(contents)
+		JSON.parse
+	).then(
+		(pkg) => pkg.name === 'fse'
+	),
+	// test fs.readJson
+	fs.readJson(
+		path.join(__dirname, 'package.json')
 	).then(
 		(pkg) => pkg.name === 'fse'
 	),
