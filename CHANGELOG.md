@@ -1,5 +1,13 @@
 # Changes to fse
 
+### 4.0.0 (November 7, 2017)
+
+- Changed: `mkdirSync`, `rmdirSync`, `writeFileSync` methods are now recursive
+- Added: New `copydirSync`, `copyFileSync`, `readJsonSync`, `touchFileSync`
+  methods
+- Added: Tests for all new functionality
+- Updated: Ensure file exists on `copyFile` method
+
 ### 3.0.0 (May 17, 2017)
 
 - Added: Support for Node v4
