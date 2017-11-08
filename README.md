@@ -4,12 +4,15 @@
 [![Unix Status][cli-img]][cli-url]
 [![Windows Status][win-img]][win-url]
 
-[fse] is [fs] then-ified, extended, and dependency-free. It features;
+[fse] is [fs] as promises, extended, and dependency-free. It features;
 
 - Node 4+ compatibility, and;
-- improved `fs.mkdir`, `fs.rmdir`,  and `fs.writeFile` methods allowing
-  recursive modification of the file system, and;
-- new `fs.copydir`, `fs.copyFile`, `fs.readJson`, and `fs.touchFile` methods.
+- improved `fs.mkdir`, `fs.mkdirSync`, `fs.rmdir`, `fs.rmdirSync`,
+  `fs.writeFile`, and `fs.writeFileSync` methods allowing recursive
+  modification of the file system, and;
+- new `fs.copydir`, `fs.copydirSync`, `fs.copyFile`, `fs.copyFileSync`,
+  `fs.readJson`, `fs.readJsonSync`, `fs.touchFile`, and `fs.touchFileSync`
+  methods.
 
 ## New Methods
 
@@ -47,7 +50,8 @@ fse.readJson(path)
 - path `<string>` | `<Buffer>` | `<integer>` filename or file descriptor
 
 Promised reading of the entire contents of a JSON file, constructing the
-JavaScript value or object described by the file.
+JavaScript value or object described by the file. Resolves as the contents of
+the file, or rejects with an error.
 
 ### fse.touchFile
 
@@ -60,12 +64,17 @@ fse.touchFile(path)
 Promised existence of a file, creating the file if it does not exist. `path`
 may be used to create otherwise non-existent directories.
 
+---
+
+All existing [fs methods] are available.
+
 ## Licensing
 
 [fse] uses the CC0 “No Rights Reserved” license.
 
-[fse]: https://github.com/jonathantneal/fse
 [fs]: https://nodejs.org/api/fs.html
+[fs methods]: https://nodejs.org/api/fs.html
+[fse]: https://github.com/jonathantneal/fse
 
 [npm-url]: https://www.npmjs.com/package/fse
 [npm-img]: https://img.shields.io/npm/v/fse.svg
