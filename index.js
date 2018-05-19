@@ -3,7 +3,9 @@ const path = require('path');
 
 Object.assign(
 	exports,
-	fs,
+	...Object.keys(fs).filter(key => key !== 'promises').map(key => ({
+		[key]: fs[key]
+	})),
 	...[
 		'access',
 		'appendFile',
@@ -207,7 +209,7 @@ Object.assign(
 
 			// buffer
 			const bufferLength = 64 * 1024;
-			const buffer = new Buffer(bufferLength);
+			const buffer = Buffer.alloc(bufferLength);
 
 			// position
 			let bytesRead = 1;

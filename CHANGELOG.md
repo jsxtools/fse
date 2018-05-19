@@ -1,5 +1,10 @@
 # Changes to fse
 
+### 4.0.1 (November 7, 2017)
+
+- Fixed: Replaced the deprecated `new Buffer()` call with `Buffer.alloc()`
+- Fixed: Skip Node v10.1.0 `fs.promises`.
+
 ### 4.0.0 (November 7, 2017)
 
 - Changed: `mkdirSync`, `rmdirSync`, `writeFileSync` methods are now recursive
