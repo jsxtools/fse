@@ -1,6 +1,6 @@
 {
   "name": "fse",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "fs: then-ified, extended, and dependency-free",
   "author": "Jonathan Neal <jonathantneal@hotmail.com>",
   "license": "CC0-1.0",
@@ -8,32 +8,56 @@
   "homepage": "https://github.com/jonathantneal/fse#readme",
   "bugs": "https://github.com/jonathantneal/fse/issues",
   "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
   "files": [
-    "index.js"
+    "index.js",
+    "index.mjs",
+    "index.d.ts"
   ],
   "scripts": {
-    "prepublishOnly": "npm test && npm run test:pre",
-    "postpublish": "npm run test:post",
-    "test": "echo 'Running tests...'; npm run test:js && npm run test:pre && npm run test:node && npm run test:post",
-    "test:pre": "babel index.js --presets=env --out-file index.js --source-maps inline",
-    "test:post": "git checkout index.js",
-    "test:js": "eslint *.js --cache --ignore-pattern .gitignore",
+    "build": "rollup --config --silent",
+    "prepublishOnly": "npm test && npm run build",
+    "pretest:node": "npm run build",
+    "test": "npm run test:js && npm run test:node",
+    "test:js": "eslint src/{*,**/*}.js --cache --ignore-path .gitignore --quiet",
     "test:node": "node test"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=8.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "eslint": "^4.19.1",
-    "eslint-config-dev": "^2.0.0"
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.0.1",
+    "pre-commit": "^1.2.2",
+    "rollup": "^1.16.2",
+    "rollup-plugin-babel": "^4.3.3"
   },
   "eslintConfig": {
-    "extends": "dev",
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
+    "extends": "eslint:recommended",
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "impliedStrict": true,
+      "sourceType": "module"
+    },
+    "root": true,
     "rules": {
-      "no-extra-parens": [
-        0
+      "no-console": [
+        0,
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
       ]
     }
   },

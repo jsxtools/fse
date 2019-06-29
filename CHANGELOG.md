@@ -1,5 +1,9 @@
 # Changes to fse
 
+### 5.0.0 (June 28, 2019)
+
+- Updated: Node 8+ compatibility (major)
+
 ### 4.0.1 (November 7, 2017)
 
 - Fixed: Replaced the deprecated `new Buffer()` call with `Buffer.alloc()`

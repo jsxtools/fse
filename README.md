@@ -6,7 +6,7 @@
 
 [fse] is [fs] as promises, extended, and dependency-free. It features;
 
-- Node 4+ compatibility, and;
+- Node 8+ compatibility, and;
 - improved `fs.mkdir`, `fs.mkdirSync`, `fs.rmdir`, `fs.rmdirSync`,
   `fs.writeFile`, and `fs.writeFileSync` methods allowing recursive
   modification of the file system, and;

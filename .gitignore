@@ -1,3 +1,10 @@
-node_modules
-*.*cache*
+.*
+!.editorconfig
+!.gitignore
+!.rollup.js
+!.travis.yml
 *.log*
+/index.*
+!/index.d.ts
+node_modules
+package-lock.json

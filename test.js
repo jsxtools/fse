@@ -127,7 +127,7 @@ Promise.all([
 			fs.copydirSync(path.join(__dirname, 'test-file-sync', 'quick', 'brown'), path.join(__dirname, 'test-file-sync', 'quick', 'beige'));
 			fs.lstatSync(path.join(__dirname, 'test-file-sync', 'quick', 'beige', 'fox.copy'));
 			fs.unlinkSync(path.join(__dirname, 'test-file-sync', 'quick', 'brown', 'fox.copy'));
-			
+
 			try {
 				fs.lstatSync(path.join(__dirname, 'test-file-sync', 'quick', 'brown', 'fox.copy'));
 			} catch (err) {
