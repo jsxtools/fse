@@ -4,6 +4,13 @@ language: node_js
 
 node_js:
   - 8
+  - 10
+  - 12
+  - 14
 
 install:
-  - npm install --ignore-scripts
+  - rm -rf ~/.nvm && git clone https://github.com/nvm-sh/nvm.git ~/.nvm && source ~/.nvm/nvm.sh && nvm install 14 && nvm install $TRAVIS_NODE_VERSION
+  - nvm use 14
+  - yarn
+  - yarn build
+  - nvm use $TRAVIS_NODE_VERSION

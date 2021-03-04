@@ -7,7 +7,8 @@
   "repository": "jonathantneal/fse",
   "homepage": "https://github.com/jonathantneal/fse#readme",
   "bugs": "https://github.com/jonathantneal/fse/issues",
-  "main": "index.js",
+  "type": "module",
+  "main": "index.cjs",
   "module": "index.mjs",
   "types": "index.d.ts",
   "files": [
@@ -16,76 +17,103 @@
     "index.d.ts"
   ],
   "scripts": {
-    "build": "rollup --config --silent",
+    "build": "node bin/build.js",
     "prepublishOnly": "npm test && npm run build",
     "pretest:node": "npm run build",
-    "test": "npm run test:js && npm run test:node",
-    "test:js": "eslint src/{*,**/*}.js --cache --ignore-path .gitignore --quiet",
-    "test:node": "node test"
+    "test": "node bin/test-unit.js",
+    "lint": "node bin/test-lint.js"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">= 8.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "babel-eslint": "^10.0.2",
-    "eslint": "^6.0.1",
-    "pre-commit": "^1.2.2",
-    "rollup": "^1.16.2",
-    "rollup-plugin-babel": "^4.3.3"
+    "esbuild": "0.8.54",
+    "eslint": "7.21.0",
+    "pre-commit": "1.2.2"
   },
   "eslintConfig": {
     "env": {
-      "browser": true,
       "es6": true,
       "node": true
     },
     "extends": "eslint:recommended",
-    "parser": "babel-eslint",
+    "ignorePatterns": [
+      "bin/*.js"
+    ],
     "parserOptions": {
-      "ecmaVersion": 2018,
-      "impliedStrict": true,
-      "sourceType": "module"
+      "ecmaVersion": 12,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "modules": true
+      }
     },
-    "root": true,
     "rules": {
-      "no-console": [
-        0,
-        {
-          "allow": [
-            "warn",
-            "error"
-          ]
-        }
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "never"
       ]
-    }
+    },
+    "root": true
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "printWidth": 240,
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "useTabs": true,
+    "overrides": [
+      {
+        "files": [
+          "*.json",
+          "*.md",
+          "*.yml"
+        ],
+        "options": {
+          "useTabs": false
+        }
+      }
+    ]
   },
   "keywords": [
     "fs",
-    "then",
-    "thenified",
-    "promiseified",
-    "promisified",
-    "promises",
-    "promised",
+    "async",
+    "await",
     "promise",
-    "extends",
-    "extended",
-    "extend",
-    "files",
-    "file",
-    "system",
-    "read",
-    "write",
-    "remove",
+    "promised",
+    "promiseified",
+    "promises",
+    "promisified",
+    "thenified",
+    "catch",
+    "finally",
+    "then",
     "copy",
-    "touch",
-    "json",
-    "file",
     "directory",
-    "windows",
+    "extend",
+    "extended",
+    "extends",
+    "file",
+    "file",
+    "files",
+    "json",
+    "read",
+    "remove",
+    "system",
+    "touch",
+    "write",
+    "cjs",
+    "esm",
+    "node",
+    "nodejs",
+    "linux",
     "macos",
-    "linux"
+    "windows"
   ]
 }
